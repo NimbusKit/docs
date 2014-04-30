@@ -139,6 +139,12 @@ def gendocs():
 		doxyfile.write("\n features/"+foldername+"/src \\")
 	doxyfile.write("\n .docsbuild")
 
+	doxyfile.write("\n\nEXCLUDE = ")
+	for feature in features:
+		foldername=string.lower(feature)
+		if foldername != 'basics':
+			doxyfile.write("\\\n features/"+foldername+"/src/NimbusKitBasics.h")
+
 	doxyfile.write("\n\nIMAGE_PATH = \\")
 	for feature in features:
 		foldername=string.lower(feature)
