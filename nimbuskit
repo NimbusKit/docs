@@ -129,9 +129,28 @@ def gendocs():
 				dst_file.close()
 				src_file.close()
 
-	os.system("doxygen docs/Doxyfile")
+	shutil.copyfile("docs/Doxyfile", "docs/.Doxyfile.tmp")
+
+	doxyfile = open("docs/.Doxyfile.tmp", "a")
+
+	doxyfile.write("\nINPUT = \\")
+	for feature in features:
+		foldername=string.lower(feature)
+		doxyfile.write("\n features/"+foldername+"/src \\")
+	doxyfile.write("\n .docsbuild")
+
+	doxyfile.write("\n\nIMAGE_PATH = \\")
+	for feature in features:
+		foldername=string.lower(feature)
+		doxyfile.write("\n features/"+foldername+"/docs/gfx \\")
+	doxyfile.write("\n docs/gfx/")
+
+	doxyfile.close()
+
+	os.system("doxygen docs/.Doxyfile.tmp")
 
 	shutil.rmtree('.docsbuild')
+	os.remove('docs/.Doxyfile.tmp')
 
 
 def main():
