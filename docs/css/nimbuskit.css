@@ -32,6 +32,10 @@
   clear: both;
 }
 
+.image {
+  margin: 20px;
+}
+
 table.modificationtable {
   border: 1px #888 solid;
   padding: 2px;

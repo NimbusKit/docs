@@ -29,6 +29,7 @@ from optparse import OptionParser
 features = [
 	"AttributedLabel",
 	"Basics",
+	"CoreDataCoding"
 ]
 
 def status():
