@@ -29,7 +29,7 @@ from optparse import OptionParser
 features = [
 	"AttributedLabel",
 	"Basics",
-	"CoreDataCoding"
+	"CoreDataCoding",
 	"Currencies"
 ]
 
