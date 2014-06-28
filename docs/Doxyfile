@@ -44,7 +44,7 @@ PROJECT_NUMBER         =
 # for a project that appears at the top of each page and should give viewer a
 # quick idea about the purpose of the project. Keep the description short.
 
-PROJECT_BRIEF          = "A collection of well-documented, battle-hardened iOS libraries."
+PROJECT_BRIEF          = "Well-documented, battle-hardened iOS libraries."
 
 # With the PROJECT_LOGO tag one can specify an logo or icon that is included in
 # the documentation. The maximum height of the logo should not exceed 55 pixels
@@ -459,7 +459,7 @@ EXTRACT_ANON_NSPACES   = NO
 # section is generated. This option has no effect if EXTRACT_ALL is enabled.
 # The default value is: NO.
 
-HIDE_UNDOC_MEMBERS     = YES
+HIDE_UNDOC_MEMBERS     = NO
 
 # If the HIDE_UNDOC_CLASSES tag is set to YES, doxygen will hide all
 # undocumented classes that are normally visible in the class hierarchy. If set
@@ -791,7 +791,7 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                =
+#EXCLUDE                =
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
@@ -1092,7 +1092,10 @@ HTML_EXTRA_STYLESHEET  = docs/css/appledocs.css
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
 HTML_EXTRA_FILES       = docs/js/widget.js \
+                         docs/js/resize_twocol.js \
                          docs/gfx/nimbus128.png \
+                         docs/gfx/nimbus_off.png \
+                         docs/gfx/nimbus_on.png \
                          docs/css/nimbuskit.css
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen
@@ -1940,7 +1943,10 @@ INCLUDE_FILE_PATTERNS  =
 
 PREDEFINED             = DEBUG \
                          NS_BLOCKS_AVAILABLE \
-                         "__NI_DEPRECATED_METHOD="
+                         "__NI_DEPRECATED_METHOD=" \
+                         NS_ENUM(_type,_name)="enum _name" \
+                         CDC_DESIGNATED_INITIALIZER \
+                         CUR_DESIGNATED_INITIALIZER
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The

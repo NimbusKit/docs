@@ -1,8 +1,9 @@
 /** Doxygen-Specific Overrides for Apple Docs Style */
 
-body, table, div, p, dl {
+body, table, div, p, dl, #nav-tree .label {
   font: normal normal normal 100%/normal 'Lucida Grande',Geneva,Helvetica,Arial,sans-serif;
-  font-size: 13px;
+  font-size: 14px;
+  line-height: 24px;
 }
 
 a {
@@ -27,7 +28,7 @@ h2,
 h2.groupheader {
   font-size: 187%;
   font-weight: normal;
-  border-bottom: 1px solid #883D1E;
+  border-bottom: none;
 }
 
 p {
@@ -71,7 +72,6 @@ span.comment {
 }
 
 #nav-tree .label {
-  font: normal normal normal 100%/normal 'Lucida Grande',Geneva,Helvetica,Arial,sans-serif;
   font-size: 13px;
 }
 

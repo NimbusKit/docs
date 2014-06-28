@@ -1,14 +1,25 @@
 /** NimbusKit */
 
 #projectname,
-#projectbrief {
+#projectbrief,
+.header .ingroups code {
   font-family: HelveticaNeue,Helvetica,Arial,sans-serif;
 }
 
+.header .ingroups code {
+  font-size: 13px;
+}
+
 #projectname {
-  font-size: 300%;
+  font-size: 215%;
   margin: 0px;
-  padding: 2px 0px;
+  padding: 0;
+}
+
+#titlearea {
+  border-bottom: 0;
+  padding-top: 15px;
+  height: 100px;
 }
 
 #projectname .links {
@@ -16,16 +27,65 @@
 }
 
 #projectbrief {
-  font-size: 120%;
+  font-size: 13px;
   padding-bottom: 10px;
 }
 
 #doc-content {
-  margin-left: 250px;
+  margin-left: 260px;
+}
+
+#titlearea,
+#side-nav {
+  width: 260px;
+  background-color: ghostwhite;
+  position: fixed;
+}
+
+.contents .attention {
+  margin-left: 0px;
+  border-left: 5px solid #e87272;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 1em;
+  background-color: #fcf2f2;
+}
+
+.contents .attention h5 {
+  margin: 0;
+  display: none;
+}
+
+.contents .attention p:last-child {
+  margin-bottom: 0;
 }
 
 #side-nav {
-  width: 250px;
+  padding: 0;
+}
+
+#side-nav {
+  top: 100px;
+}
+
+#nimbus_icon {
+  float: left;
+  margin: 10px 15px;
+  background: transparent url('nimbus_off.png');
+  background-size: 69px 79px;
+  width: 69px;
+  height: 79px;
+  margin-top: -5px;
+}
+
+#nimbus_icon:hover {
+  background-image: url('nimbus_on.png');
+}
+
+#nav-tree {
+  border-right: none;
+  padding-left: 15px;
 }
 
 .clearfix {
@@ -120,6 +180,25 @@ table.modificationtable td {
 .contributor_profile .twitter,
 .contributor_profile .github {
   text-align: center;
+}
+
+blockquote {
+  margin-left: 0;
+  border-left-width: 5px;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 1em;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+h3 {
+  font-size: 120%;
+  color: #883D1E;
+  font-weight: normal;
 }
 
 #github {
