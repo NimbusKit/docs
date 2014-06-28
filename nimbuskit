@@ -30,6 +30,7 @@ features = [
 	"AttributedLabel",
 	"Basics",
 	"CoreDataCoding"
+	"Currencies"
 ]
 
 def status():
