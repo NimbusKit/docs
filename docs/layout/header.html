@@ -10,7 +10,13 @@
 <link href="$relpath^tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="$relpath^jquery.js"></script>
 <script type="text/javascript" src="$relpath^dynsections.js"></script>
-$treeview
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize_twocol.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 $search
 $mathjax
 <link href="$relpath^$stylesheet" rel="stylesheet" type="text/css" />
@@ -37,37 +43,8 @@ $extrastylesheet
 
 <!--BEGIN TITLEAREA-->
 <div id="titlearea">
-<a href="index.html"><img style="float:left" src="nimbus128.png" width="80" height="80" /></a>
-<table cellspacing="0" cellpadding="0">
- <tbody>
- <tr style="height: 56px;">
-  <!--BEGIN PROJECT_LOGO-->
-  <td id="projectlogo"><img alt="Logo" src="$relpath^$projectlogo"/></td>
-  <!--END PROJECT_LOGO-->
-  <!--BEGIN PROJECT_NAME-->
-  <td style="padding-left: 0.5em;">
-   <div id="projectname">$projectname
-   <!--BEGIN PROJECT_NUMBER-->&#160;<span class="projectnumber">$projectnumber - </span><!--END PROJECT_NUMBER-->
-   <!-- <span class="links"><a href="http://github.com/jverkoey/nimbus">Fork Nimbus on Github</a> - <a href="http://wiki.nimbuskit.info/">Visit the Nimbus Wiki</a></span> -->
-   </div>
-   <!--BEGIN PROJECT_BRIEF--><div id="projectbrief">$projectbrief</div><!--END PROJECT_BRIEF-->
-  </td>
-  <!--END PROJECT_NAME-->
-  <!--BEGIN !PROJECT_NAME-->
-   <!--BEGIN PROJECT_BRIEF-->
-    <td style="padding-left: 0.5em;">
-    <div id="projectbrief">$projectbrief</div>
-    </td>
-   <!--END PROJECT_BRIEF-->
-  <!--END !PROJECT_NAME-->
-  <!--BEGIN DISABLE_INDEX-->
-   <!--BEGIN SEARCHENGINE-->
-   <td>$searchbox</td>
-   <!--END SEARCHENGINE-->
-  <!--END DISABLE_INDEX-->
- </tr>
- </tbody>
-</table>
+<a href="index.html"><div id="nimbus_icon"></div></a> <div id="projectname">$projectname</div>
+<div id="projectbrief">$projectbrief</div>
 </div>
 <!--END TITLEAREA-->
 <!-- end header part -->
