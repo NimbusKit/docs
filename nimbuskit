@@ -30,7 +30,8 @@ features = [
 	"AttributedLabel",
 	"Basics",
 	"CoreDataCoding",
-	"Currencies"
+	"Currencies",
+#	"Sync"
 ]
 
 def status():
@@ -83,11 +84,49 @@ def push():
 
 		os.chdir(cwd)
 
+def preprocessMarkdown(src, dst, featurename):
+	if os.path.exists(src):
+		code_block_open = False
+		with open(src, 'r') as src_file:
+			src_lines = src_file.readlines()
+			dst_file = open(dst, "w")
+			dst_file.write("/**\n")
+
+			prevline = None
+			for line in src_lines:
+				if line.startswith("<!--dox ") and line.endswith("-->\n"):
+					line = line.replace("<!--dox ", "").replace("-->", "")
+				elif line.startswith("=="):
+					line = line.replace("=", "-")
+				elif line.startswith("--"):
+					prevline = '### '+prevline
+					line = ''
+				elif line.startswith("```"):
+					if code_block_open:
+						line = "@endcode\n"
+					else:
+						line = "@code\n"
+					code_block_open = not code_block_open
+				if line.startswith("![](https://github.com/NimbusKit/Catalog/raw/master/docs/gfx/"):
+					line = line.replace("![](https://github.com/NimbusKit/Catalog/raw/master/docs/gfx/", "@image html ").replace(")\n", "\n")
+				if line.startswith("![](https://github.com/NimbusKit/"+featurename+"/raw/master/docs/gfx/"):
+					line = line.replace("![](https://github.com/NimbusKit/"+featurename+"/raw/master/docs/gfx/", "@image html ").replace(")\n", "\n")
+				if prevline:
+					dst_file.write(prevline)
+				prevline = line
+			if prevline:
+				dst_file.write(prevline)
+			dst_file.write("\n */\n")
+			dst_file.close()
+			src_file.close()
+
 # In order to support features having their own README files on Github while also defining Doxygen
 # groups we do some preprocessing of each feature's README before adding them to a shared .docsbuild
 # directory. We tell Doxygen to parse this directory in our Doxyfile.
-def gendocs():
+def gendocs(wantsInternal):
 	cwd = os.getcwd()
+	if os.path.exists('docs/output/html'):
+		shutil.rmtree('docs/output/html')
 
 	if not os.path.exists('.docsbuild'):
 		os.makedirs('.docsbuild')
@@ -98,38 +137,13 @@ def gendocs():
 
 		src = featurefolder+"/README.md"
 		dst = ".docsbuild/"+foldername+"README.md"
-		if os.path.exists(src):
-			code_block_open = False
-			with open(src, 'r') as src_file:
-				src_lines = src_file.readlines()
-				dst_file = open(dst, "w")
-				dst_file.write("/**\n")
+		preprocessMarkdown(src, dst, foldername)
 
-				prevline = None
-				for line in src_lines:
-					if line.startswith("<!--dox ") and line.endswith("-->\n"):
-						line = line.replace("<!--dox ", "").replace("-->", "")
-					elif line.startswith("=="):
-						line = line.replace("=", "-")
-					elif line.startswith("--"):
-						prevline = '### '+prevline
-						line = ''
-					elif line.startswith("```"):
-						if code_block_open:
-							line = "@endcode\n"
-						else:
-							line = "@code\n"
-						code_block_open = not code_block_open
-					if line.startswith("![](https://github.com/NimbusKit/Catalog/raw/master/docs/gfx/"):
-						line = line.replace("![](https://github.com/NimbusKit/Catalog/raw/master/docs/gfx/", "@image html ").replace(")\n", "\n")
-					if prevline:
-						dst_file.write(prevline)
-					prevline = line
-				if prevline:
-					dst_file.write(prevline)
-				dst_file.write("\n */\n")
-				dst_file.close()
-				src_file.close()
+		articles_dir = featurefolder+"/articles"
+
+		if os.path.exists(articles_dir):
+			for fileName in os.listdir(articles_dir):
+				preprocessMarkdown(articles_dir+'/'+fileName, ".docsbuild/"+foldername+"articles"+fileName, foldername)
 
 	shutil.copyfile("docs/Doxyfile", "docs/.Doxyfile.tmp")
 
@@ -153,6 +167,9 @@ def gendocs():
 		doxyfile.write("\n features/"+foldername+"/docs/gfx \\")
 	doxyfile.write("\n docs/gfx/")
 
+	if wantsInternal:
+		doxyfile.write("\n\INTERNAL_DOCS = YES\n")
+
 	doxyfile.close()
 
 	os.system("doxygen docs/.Doxyfile.tmp")
@@ -166,25 +183,29 @@ def main():
 
 EXAMPLES:
 
-    Status of all features:
-    > %prog status
+	Status of all features:
+	> %prog status
 
-    git add .;git commit -a for all features:
-    > %prog commit
+	git add .;git commit -a for all features:
+	> %prog commit
 
-    git push origin master for all features:
-    > %prog push
+	git push origin master for all features:
+	> %prog push
 
-    Generates all documentation:
-    > %prog gendocs'''
+	Generates all documentation:
+	> %prog gendocs'''
 	parser = OptionParser(usage = usage)
 
 	parser.add_option("-m", "--message", dest="message",
-	                  help="Commit all features with the given message")
+					  help="Commit all features with the given message")
+
+	parser.add_option("-i", "--internal", dest="internal",
+					  help="Generate internal docs",
+					  action="store_true")
 
 	parser.add_option("-v", "--verbose", dest="verbose",
-	                  help="Display verbose output",
-	                  action="store_true")
+					  help="Display verbose output",
+					  action="store_true")
 
 	(options, args) = parser.parse_args()
 
@@ -207,7 +228,7 @@ EXAMPLES:
 			push()
 			did_anything = True
 		elif command == 'gendocs':
-			gendocs()
+			gendocs(options.internal)
 			did_anything = True
 
 	if not did_anything:
