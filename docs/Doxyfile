@@ -2348,6 +2348,9 @@ NIMBUSKIT_TREAT_MARKDOWN_FILES_AS_DOCS = YES
 NIMBUSKIT_TREAT_MARKDOWN_INDENTS_AS_CODE = YES
 NIMBUSKIT_NO_ENUM_WRITEOUT = YES
 NIMBUSKIT_DISABLE_MORE_LINK = YES
+NIMBUSKIT_PRETTY_PROTOCOL_FORMATTING = YES
+NIMBUSKIT_TABLE_HEADER = YES
+NIMBUSKIT_DONT_LINKIFY_SELF = YES
 ALIASES += protected="\n<b><i>For subclass use only.</i></b>\n"
 ALIASES += default_property="\nThe default value of this property is"
 ALIASES += param_animated="\n@param animated `YES` if you want to animate the change, `NO` if it should be immediate."
