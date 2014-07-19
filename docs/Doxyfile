@@ -2350,7 +2350,12 @@ NIMBUSKIT_NO_ENUM_WRITEOUT = YES
 NIMBUSKIT_DISABLE_MORE_LINK = YES
 NIMBUSKIT_PRETTY_PROTOCOL_FORMATTING = YES
 NIMBUSKIT_TABLE_HEADER = YES
+NIMBUSKIT_ENABLE_EXTERNAL_LINK_MAP = YES
 NIMBUSKIT_DONT_LINKIFY_SELF = YES
 ALIASES += protected="\n<b><i>For subclass use only.</i></b>\n"
 ALIASES += default_property="\nThe default value of this property is"
 ALIASES += param_animated="\n@param animated `YES` if you want to animate the change, `NO` if it should be immediate."
+NIMBUSKIT_EXTERNAL_LINK_MAP += NSObject=https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSObject_Class/Reference/Reference.html
+NIMBUSKIT_EXTERNAL_LINK_MAP += NSCopying-p=https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Protocols/NSCopying_Protocol/Reference/Reference.html
+NIMBUSKIT_EXTERNAL_LINK_MAP += NSCoding-p=https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Protocols/NSCoding_Protocol/Reference/Reference.html
+NIMBUSKIT_EXTERNAL_LINK_MAP += NSSecureCoding-p=https://developer.apple.com/library/mac/documentation/Foundation/Reference/NSSecureCoding_Protocol_Ref/content/NSSecureCoding.html
